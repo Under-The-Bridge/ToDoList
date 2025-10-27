@@ -113,4 +113,37 @@ main{
 .list{
     width: 525px;
     height: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input{
+        width: 26px;
+        height: 26px;
+        border: 1px #6C63FF solid;
+        box-sizing: border-box;
+    }
+    .listName{
+        width: 420px;
+        height: 20px;
+    }
+    .listBtns{
+        width: 62px;
+        height: 18px;
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        >*{
+            background-repeat: no-repeat;
+        }
+        .pen{
+            width: 18px;
+            height: 18px;
+            background-image: url(img/pen.svg);
+        }
+        .trashCan{
+            width: 18px;
+            height: 18px;
+            background-image: url(img/trash.svg);
+        }
+    }
 }
