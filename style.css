@@ -3,6 +3,10 @@
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-transform: uppercase;
+    transition: 0.5s ease-in;
+    :focus{
+        outline: none;
+    }
 }
 body{
     display: flex;
@@ -11,7 +15,14 @@ body{
 content{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 10px;
+    >div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
 }
 
 header{
@@ -108,14 +119,31 @@ header{
 main{
     width: 750px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+#emptyList{
+    width: 221px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#detective{
+    width: 221px;
+    height: 174px;
+    background-image: url(img/detective.svg);
 }
 .list{
     width: 525px;
-    height: 26px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
+    border-top: 1px #6C63FF solid;
     input{
         width: 26px;
         height: 26px;
@@ -125,6 +153,7 @@ main{
     .listName{
         width: 420px;
         height: 20px;
+        font-size: 20px;
     }
     .listBtns{
         width: 62px;
@@ -132,6 +161,7 @@ main{
         display: flex;
         align-self: center;
         justify-content: center;
+        gap: 10px;
         >*{
             background-repeat: no-repeat;
         }
@@ -146,4 +176,117 @@ main{
             background-image: url(img/trash.svg);
         }
     }
+}
+.list:first-child{
+    border: none;
+}
+
+#addListPanel{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    z-index: -1;
+}
+#buttonPos{
+    display: flex;
+    justify-content: end;
+    width: 750px;
+}
+#addListButton{
+    width: 50px;
+    height: 50px;
+    background-color: #6C63FF;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform:translateY(-24px);
+    >div{
+        width: 24px;
+        height: 24px;
+        background-image: url(img/plus.svg);
+    }
+}
+#panelAddList{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
+#panel{
+    flex-wrap: wrap;
+    width: 500px;
+    height: 289px;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#inner-panel{
+    width: 440px;
+    height: 255px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    #first{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-content: center;
+        gap: 20px;
+        #NewVote{
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            font-size: 24px;
+        }
+    }
+    #second{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    #second>*{
+        height: 38px;
+        font-size: 18px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input{
+        border: 1px #6C63FF solid;
+        box-sizing: border-box;
+        border-radius:5px;
+        width: 440px;
+        height: 38px;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 8px 8px 16px;
+    }
+    input::placeholder{
+        color:#C3C1E5;
+        text-transform: none;
+        font-size: 16px;
+    }
+}
+#cansel{
+    width: 110px;
+    border: 1px #6C63FF solid;
+    box-sizing: border-box;
+    color: #6C63FF;
+}
+#apply{
+    width: 97px;
+    background-color: #6C63FF;
+    color: white;
 }

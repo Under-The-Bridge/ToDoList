@@ -7,38 +7,63 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-
 <body>
     <content>
         <header>
-            <div id="headTitle">
-                <div>TODO LIST</div>
-            </div>
-            <form id="underHeadPanel">
-                <div id="input"><input type="text" placeholder="Search note...">
-                    <button>
+                <div id="headTitle">
+                    <div>TODO LIST</div>
+                </div>
+                <form id="underHeadPanel">
+                    <div id="input"><input type="text" placeholder="Search note..." id="searchNote">
+                        <button>
+                            <div></div>
+                        </button>
+                    </div>
+                    <select name="" id="vipad">
+                        <option value="all">ALL</option>
+                    </select>
+                    <div id="theme">
                         <div></div>
-                    </button>
+                    </div>
+                </form>
+            </header>
+            <main>
+                <!-- <div class="list" id="note1">
+                    <input type="checkbox">
+                    <div class="listName">NOTE #1</div>
+                    <div class="listBtns">
+                        <div class="pen"></div>
+                        <div class="trashCan"></div>
+                    </div>
+                </div> -->
+                <div id="emptyList">
+                    <div id="detective"></div>
+                    <div>Empty</div>
                 </div>
-                <select name="" id="vipad">
-                    <option value="all">ALL</option>
-                </select>
-                <div id="theme">
-                    <div></div>
-                </div>
-            </form>
-        </header>
-        <main>
-            <div class="list" id="note1">
-                <input type="checkbox">
-                <div class="listName">wwwwwww</div>
-                <div class="listBtns">
-                    <div class="pen"></div>
-                    <div class="trashCan"></div>
+            </main>
+    </content>
+    <div id="addListPanel">
+        <div id="panelAddList">
+            <div id="panel">
+                <div id="inner-panel">
+                    <div id="first">
+                        <div id="NewVote"><div>NEW VOTE</div></div>
+                        <input type="text" placeholder="Input your note..." id="inputNote">
+                    </div>
+                    <div id="second">
+                        <div id="cansel"><div>CANSEL</div></div>
+                        <div id="apply"><div>APPLY</div></div>
+                    </div>
                 </div>
             </div>
-        </main>
-    </content>
+        </div>
+        <div id="buttonPos">
+            <div id="addListButton">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
