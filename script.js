@@ -22,13 +22,19 @@ canselBtn.addEventListener("click", ()=>{
 
 //dark theme
 let lightThemeElements = document.querySelectorAll(".light-theme");
+let switchTheme = document.querySelector("#theme");
 
-lightThemeElements.forEach(elem =>{
-    elem.className = "dark-theme";
-})
+switchTheme.addEventListener("click", ()=>{
+    lightThemeElements.forEach(elem =>{
+        if(elem.className == "light-theme"){
+            elem.className = "dark-theme";
+        }else{
+            elem.className = "light-theme";
+        }
+    });
+});
 
 //adding Notes
-let emptyImg = document.querySelector("#emptyList");
 let inputNote = document.querySelector("#inputNote");
 let applyBtn = document.querySelector("#apply");
 let mainElem = document.querySelector("#main");
@@ -42,20 +48,29 @@ applyBtn.addEventListener("click",()=>{
     list.innerHTML = '<input type="checkbox" class="checkbox"><div class="listName"></div><div class="listBtns"><div class="pen"></div><div class="trashCan"></div></div>'
     list.className = "list";
     list.id = `note${countLists}`;
-    list.querySelector(".listName").innerText = `NOTE #${countLists}`;
+    if(inputNote.value == ""){
+        list.querySelector(".listName").innerText = `NOTE #${countLists}`;
+    }else{
+        list.querySelector(".listName").innerText = inputNote.value;
+    }
     main.appendChild(list);
     arrayLists.push(list);
 })
 
 function CheckLists(){
     if(countLists == 0){
-        emptyImg.style.display = "flex";
-    }else{
-        emptyImg.style.display = "none";
+        let elemEmpty = document.createElement("div");
+        elemEmpty.id = "emptyList";
+        elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
+        mainElem.appendChild(elemEmpty);
+    }else if(document.querySelector("#emptyList")){
+        document.querySelector("#emptyList").remove();
     }
 }
 
-
+addEventListener('keypress',()=>{
+    console.log(arrayLists);
+})
 
 arrayLists.forEach(Elem => {
     Elem.addEventListener('click', () => {
@@ -69,3 +84,27 @@ arrayLists.forEach(Elem => {
         }
     });
 });
+
+
+
+CheckLists();
+
+//search 
+
+let searchInput = document.querySelector("#searchNote");
+
+searchInput.addEventListener('input',()=>{
+    let lists = document.querySelectorAll(".list");
+    if(searchInput.value == ""){
+        lists.forEach(element =>{
+            element.style.display = "flex";
+        });
+    }else{
+        lists.forEach(element =>{
+            if(!element.querySelector(".listName").innerText.includes(searchInput.value.toUpperCase())){
+                element.style.display = "none";
+            }
+        });
+    }
+})
+
