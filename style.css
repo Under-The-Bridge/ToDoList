@@ -12,6 +12,14 @@ body{
     display: flex;
     justify-content: center;
 }
+.light-theme{
+    background-color: white;
+    color: black;
+}
+.dark-theme{
+    background-color: #252525;
+    color: white;
+}
 content{
     display: flex;
     flex-direction: column;
@@ -62,6 +70,7 @@ header{
         padding: 8px 8px 8px 16px;
     }
     input{
+        width: 100%;
         font-size: 16px;
         text-transform: none;
         border: none;
@@ -130,6 +139,7 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    z-index: -1;
 }
 #detective{
     width: 221px;
@@ -224,7 +234,6 @@ main{
     flex-wrap: wrap;
     width: 500px;
     height: 289px;
-    background-color: white;
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -243,7 +252,7 @@ main{
         justify-content: end;
         align-content: center;
         gap: 20px;
-        #NewVote{
+        #NewNote{
             height: 24px;
             display: flex;
             justify-content: center;
