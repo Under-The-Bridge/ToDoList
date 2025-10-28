@@ -43,7 +43,7 @@ let countLists = 0;
 
 applyBtn.addEventListener("click",()=>{
     countLists++;
-    CheckLists();
+    addEmptyImg();
     let list = document.createElement("div");
     list.innerHTML = '<input type="checkbox" class="checkbox"><div class="listName"></div><div class="listBtns"><div class="pen"></div><div class="trashCan"></div></div>'
     list.className = "list";
@@ -57,7 +57,7 @@ applyBtn.addEventListener("click",()=>{
     arrayLists.push(list);
 })
 
-function CheckLists(){
+function addEmptyImg(){
     if(countLists == 0){
         let elemEmpty = document.createElement("div");
         elemEmpty.id = "emptyList";
@@ -68,9 +68,19 @@ function CheckLists(){
     }
 }
 
-addEventListener('keypress',()=>{
-    console.log(arrayLists);
-})
+function addEmptyImgForSearch(){
+    let elemEmpty = document.createElement("div");
+    elemEmpty.id = "emptyList";
+    elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
+    mainElem.appendChild(elemEmpty);
+}
+function removeEmptyImgForSearch(){
+    let elemEmpty = document.createElement("div");
+    elemEmpty.id = "emptyList";
+    elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
+    mainElem.appendChild(elemEmpty);
+}
+
 
 arrayLists.forEach(Elem => {
     Elem.addEventListener('click', () => {
@@ -87,7 +97,7 @@ arrayLists.forEach(Elem => {
 
 
 
-CheckLists();
+addEmptyImg();
 
 //search 
 
@@ -100,11 +110,27 @@ searchInput.addEventListener('input',()=>{
             element.style.display = "flex";
         });
     }else{
+        let temp = true;
         lists.forEach(element =>{
             if(!element.querySelector(".listName").innerText.includes(searchInput.value.toUpperCase())){
                 element.style.display = "none";
+            }else{
+                element = false;
             }
         });
+        if(temp){
+
+        }
     }
 })
 
+
+
+// debug zone
+
+addEventListener('keypress',(i)=>{
+    if(i.key == "i"){
+        console.log(arrayLists);
+        alert(document.querySelector(".checkbox").checked)
+    }
+})
