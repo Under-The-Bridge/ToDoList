@@ -10,12 +10,12 @@ let emptyListImg = document.querySelector("#emptyList");
 
 
 addListBtn.addEventListener("click", ()=>{
-    panelBG.style.display = "flex";
+    panelBG.style.opacity = "1";
     panelBG.style.zIndex = "1";
     wholeAddPanel.style.zIndex = "1";
 })
 canselBtn.addEventListener("click", ()=>{
-    panelBG.style.display = "none";
+    panelBG.style.opacity = "0";
     panelBG.style.zIndex = "-1";
     wholeAddPanel.style.zIndex = "-1";
 })
@@ -68,20 +68,7 @@ function addEmptyImg(){
     }
 }
 
-function addEmptyImgForSearch(){
-    let elemEmpty = document.createElement("div");
-    elemEmpty.id = "emptyList";
-    elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
-    mainElem.appendChild(elemEmpty);
-}
-function removeEmptyImgForSearch(){
-    let elemEmpty = document.createElement("div");
-    elemEmpty.id = "emptyList";
-    elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
-    mainElem.appendChild(elemEmpty);
-}
-
-
+//not work. why????
 arrayLists.forEach(Elem => {
     Elem.addEventListener('click', () => {
         let listNameStyle = Elem.parentElement.querySelector(".listName").style;
@@ -102,35 +89,59 @@ addEmptyImg();
 //search 
 
 let searchInput = document.querySelector("#searchNote");
-
 searchInput.addEventListener('input',()=>{
-    let lists = document.querySelectorAll(".list");
-    if(searchInput.value == ""){
-        lists.forEach(element =>{
-            element.style.display = "flex";
-        });
-    }else{
-        let temp = true;
-        lists.forEach(element =>{
-            if(!element.querySelector(".listName").innerText.includes(searchInput.value.toUpperCase())){
-                element.style.display = "none";
-            }else{
-                element = false;
-            }
-        });
-        if(temp){
-
-        }
-    }
+    globalFilter()
+    EmptyImgForSearch();
 })
 
 
+let selectionOptions = document.querySelector("#vipad")
+
+selectionOptions.addEventListener("input", ()=>{
+    globalFilter()
+    EmptyImgForSearch();
+})
+
+function EmptyImgForSearch(){
+    let lists = document.querySelectorAll(".list");
+    let canAdd = true;
+    lists.forEach(element =>{
+        if(element.style.display != "none") canAdd = false;
+    })
+    if(document.querySelector("#emptyList") && !canAdd){
+        document.querySelector("#emptyList").remove();
+    }
+    if(canAdd && !document.querySelector("#emptyList")){
+        let elemEmpty = document.createElement("div");
+        elemEmpty.id = "emptyList";
+        elemEmpty.innerHTML = '<div id="detective"></div><div>Not found</div>'
+        mainElem.appendChild(elemEmpty);
+    }
+}
+
+//YA MOJET TYPOI NO ON KAKIMTO CHUDOM ZARABOTAL ETOT FILTER            F@CK
+function globalFilter(){
+    let lists = document.querySelectorAll(".list");
+    lists.forEach(element =>{
+        element.style.display = "flex";
+        if(!element.querySelector(".listName").innerText.includes(searchInput.value.toUpperCase())){
+            element.style.display = "none";
+        }
+        if(selectionOptions.value == "complete" && !element.querySelector(".checkbox").checked){
+            element.style.display = "none";
+        }
+        if(selectionOptions.value == "incomplete" && element.querySelector(".checkbox").checked){
+            element.style.display = "none";
+        }
+    })
+}
 
 // debug zone
 
 addEventListener('keypress',(i)=>{
     if(i.key == "i"){
-        console.log(arrayLists);
-        alert(document.querySelector(".checkbox").checked)
+        // console.log(arrayLists);
+        // alert(document.querySelector(".checkbox").checked)
+        alert(selectionOptions.value);
     }
 })
