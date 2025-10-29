@@ -23,13 +23,14 @@ canselBtn.addEventListener("click", ()=>{
 //dark theme
 let lightThemeElements = document.querySelectorAll(".light-theme");
 let switchTheme = document.querySelector("#theme");
-
 switchTheme.addEventListener("click", ()=>{
     lightThemeElements.forEach(elem =>{
         if(elem.className == "light-theme"){
             elem.className = "dark-theme";
+            switchTheme.querySelector("div").style.backgroundImage = "url(img/sun.svg)"
         }else{
             elem.className = "light-theme";
+            switchTheme.querySelector("div").style.backgroundImage = "url(img/moon.svg)"
         }
     });
 });
@@ -53,7 +54,9 @@ applyBtn.addEventListener("click",()=>{
     }else{
         list.querySelector(".listName").innerText = inputNote.value;
     }
+    inputNote.value = "";
     main.appendChild(list);
+    addEventListenerNote(list);
     arrayLists.push(list);
 })
 
@@ -69,9 +72,22 @@ function addEmptyImg(){
 }
 
 //not work. why????
-arrayLists.forEach(Elem => {
-    Elem.addEventListener('click', () => {
-        let listNameStyle = Elem.parentElement.querySelector(".listName").style;
+// arrayLists.forEach(Elem => {
+//     Elem.addEventListener('click', () => {
+//         let listNameStyle = Elem.parentElement.querySelector(".listName").style;
+//         if (listNameStyle.textDecoration == "line-through") {
+//             listNameStyle.textDecoration = "none";
+//             listNameStyle.color = "black";
+//         }else{
+//             listNameStyle.textDecoration = "line-through";
+//             listNameStyle.color = "#25252580";
+//         }
+//     });
+// });
+
+function addEventListenerNote(note){
+    note.querySelector(".checkbox").addEventListener("input",()=>{
+        let listNameStyle = note.querySelector(".listName").style;
         if (listNameStyle.textDecoration == "line-through") {
             listNameStyle.textDecoration = "none";
             listNameStyle.color = "black";
@@ -79,10 +95,11 @@ arrayLists.forEach(Elem => {
             listNameStyle.textDecoration = "line-through";
             listNameStyle.color = "#25252580";
         }
+    })
+    note.querySelector(".trashCan").addEventListener("click",()=>{
+        note.remove();
     });
-});
-
-
+}
 
 addEmptyImg();
 
@@ -135,6 +152,7 @@ function globalFilter(){
         }
     })
 }
+
 
 // debug zone
 

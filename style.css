@@ -3,7 +3,7 @@
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-transform: uppercase;
-    transition: 0.5s ease-in;
+    transition: 0.25s ease-in;
     :focus{
         outline: none;
     }
@@ -130,6 +130,7 @@ header{
             width: 22px;
             height: 22px;
             background-image: url(img/moon.svg);
+            background-repeat: no-repeat;
         }
     }
     #theme:hover, #vipad:hover{
@@ -193,10 +194,16 @@ main{
             height: 18px;
             background-image: url(img/pen.svg);
         }
+        .pen:hover{
+            background-image: url(img/penHovered.svg);
+        }
         .trashCan{
             width: 18px;
             height: 18px;
             background-image: url(img/trash.svg);
+        }
+        .trashCan:hover{
+            background-image: url(img/trashCanHovered.svg);
         }
     }
 }
