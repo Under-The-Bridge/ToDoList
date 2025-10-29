@@ -4,21 +4,46 @@ let panelBG = document.querySelector("#panelAddList");
 let wholeAddPanel = document.querySelector("#addListPanel");
 let canselBtn = document.querySelector("#second>#cansel");
 let emptyListImg = document.querySelector("#emptyList");
-
+let inputNote = document.querySelector("#inputNote");
+let applyBtn = document.querySelector("#apply");
+let mainElem = document.querySelector("#main");
+let addingPanelOpened = false;
+let countLists = 0;
 
 
 
 
 addListBtn.addEventListener("click", ()=>{
-    panelBG.style.opacity = "1";
-    panelBG.style.zIndex = "1";
+    OpenAddPanel();
+    inputNote.focus();
+    addEventListener("keyup",(esc)=>{
+        if(esc.key == "Escape" && addingPanelOpened){
+            CloseAddPanel();
+        }
+        if(esc.key == "Enter" && addingPanelOpened){
+            addNote();
+        }
+    });
+})
+canselBtn.addEventListener("click", CloseAddPanel);
+panelBG.addEventListener("click", CloseAddPanel);
+
+function OpenAddPanel(){
     wholeAddPanel.style.zIndex = "1";
-})
-canselBtn.addEventListener("click", ()=>{
-    panelBG.style.opacity = "0";
-    panelBG.style.zIndex = "-1";
+    panelBG.style.display = "flex";
+    setTimeout(()=>{
+        panelBG.style.opacity = "1";
+    }, 250)
+    addingPanelOpened = true;
+}
+function CloseAddPanel(){
     wholeAddPanel.style.zIndex = "-1";
-})
+    panelBG.style.opacity = "0";
+    setTimeout(()=>{
+        panelBG.style.display = "none";
+    }, 250)
+    addingPanelOpened = false;
+}
 
 //dark theme
 let lightThemeElements = document.querySelectorAll(".light-theme");
@@ -28,25 +53,44 @@ switchTheme.addEventListener("click", ()=>{
         if(elem.className == "light-theme"){
             elem.className = "dark-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/sun.svg)"
+            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detectiveDarkTheme.svg)"
         }else{
             elem.className = "light-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/moon.svg)"
+            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detective.svg)"
         }
     });
 });
 
 //adding Notes
-let inputNote = document.querySelector("#inputNote");
-let applyBtn = document.querySelector("#apply");
-let mainElem = document.querySelector("#main");
-let arrayLists = [];
-let countLists = 0;
+let listParts = `
+    <div class="checkAndNote">
+        <input type="checkbox" class="checkbox">
+        <div class="listName">NOTE #1</div>
+    </div>
+    <div class="changeInputText">
+        <input type="text" class="textInput">
+    </div>
+    <div class="listBtns">
+        <div class="pen"></div>
+        <div class="trashCan"></div>
+    </div>
+    <div class="undoPanel">
+        <div class="counter"><div>3</div></div>
+        <div class="undoText">
+            <div>UNDO</div>
+            <div class="undoImg"></div>
+        </div>
+    </div>
+`;
 
-applyBtn.addEventListener("click",()=>{
+applyBtn.addEventListener("click",addNote);
+
+function addNote(){
     countLists++;
     addEmptyImg();
     let list = document.createElement("div");
-    list.innerHTML = '<input type="checkbox" class="checkbox"><div class="listName"></div><div class="listBtns"><div class="pen"></div><div class="trashCan"></div></div>'
+    list.innerHTML = listParts;
     list.className = "list";
     list.id = `note${countLists}`;
     if(inputNote.value == ""){
@@ -58,7 +102,7 @@ applyBtn.addEventListener("click",()=>{
     main.appendChild(list);
     addEventListenerNote(list);
     arrayLists.push(list);
-})
+}
 
 function addEmptyImg(){
     if(countLists == 0){
@@ -70,7 +114,7 @@ function addEmptyImg(){
         document.querySelector("#emptyList").remove();
     }
 }
-
+//peredelal snizu
 //not work. why????
 // arrayLists.forEach(Elem => {
 //     Elem.addEventListener('click', () => {
@@ -97,8 +141,57 @@ function addEventListenerNote(note){
         }
     })
     note.querySelector(".trashCan").addEventListener("click",()=>{
-        note.remove();
+        trachNote(note)
+        EmptyImgForSearch();
     });
+    note.querySelector(".pen").addEventListener("click",()=>{
+        penNote(note);
+    });
+}
+
+function trachNote(note){
+    let counter = note.querySelector(".counter");
+    let undo = note.querySelector(".undoPanel");
+    note.querySelector(".listBtns").style.display = "none";
+    note.querySelector(".undoPanel").style.display = "flex";
+    let chanceToUndo = setInterval(()=>{
+        counter.innerText--;
+        if(counter.innerText == 0) note.remove();
+    },1000);
+    undo.addEventListener("click",()=>{
+        note.querySelector(".listBtns").style.display = "flex";
+        note.querySelector(".undoPanel").style.display = "none";
+        clearInterval(chanceToUndo);
+        counter.innerText = "3";
+    })
+}
+
+function penNote(note){
+    let changeInputText = note.querySelector(".changeInputText");
+    let listName = note.querySelector(".listName");
+    let isEntered = false;
+    if(listName.style.display == "flex" || listName.style.display == ""){
+        listName.style.display = "none";
+        changeInputText.style.display = "flex";
+        changeInputText.children[0].focus();
+        changeInputText.children[0].addEventListener("keyup", (enter)=>{
+            if(enter.key == "Enter" && !isEntered){
+                isEntered = true;
+                listName.style.display = "flex";
+                listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
+                changeInputText.children[0].value = "";
+                changeInputText.style.display = "none";
+            }
+            if(enter.key == "Escape"){
+                listName.style.display = "flex";
+                changeInputText.style.display = "none";
+            }
+        });
+    }else{
+        listName.style.display = "flex";
+        changeInputText.style.display = "none";
+    }
+    EmptyImgForSearch();
 }
 
 addEmptyImg();
@@ -122,8 +215,14 @@ selectionOptions.addEventListener("input", ()=>{
 function EmptyImgForSearch(){
     let lists = document.querySelectorAll(".list");
     let canAdd = true;
+    let isEmpty = true;
     lists.forEach(element =>{
-        if(element.style.display != "none") canAdd = false;
+        if(element.style.display != "none"){
+            canAdd = false;
+        } 
+        if(lists.length != 0){
+            isEmpty = false
+        }
     })
     if(document.querySelector("#emptyList") && !canAdd){
         document.querySelector("#emptyList").remove();
@@ -131,7 +230,10 @@ function EmptyImgForSearch(){
     if(canAdd && !document.querySelector("#emptyList")){
         let elemEmpty = document.createElement("div");
         elemEmpty.id = "emptyList";
-        elemEmpty.innerHTML = '<div id="detective"></div><div>Not found</div>'
+        elemEmpty.innerHTML = `
+            <div id="detective"></div>
+            <div>${(isEmpty)?"Empty":"Not found"}</div>
+        `;
         mainElem.appendChild(elemEmpty);
     }
 }
@@ -154,12 +256,18 @@ function globalFilter(){
 }
 
 
+
+
+
+
+
 // debug zone
 
-addEventListener('keypress',(i)=>{
+addEventListener('keyup',(i)=>{
     if(i.key == "i"){
         // console.log(arrayLists);
         // alert(document.querySelector(".checkbox").checked)
-        alert(selectionOptions.value);
+        // alert(selectionOptions.value);
+        // searchInput.focus();
     }
 })
