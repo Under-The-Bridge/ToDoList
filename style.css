@@ -81,7 +81,9 @@ header{
         font-size: 16px;
         text-transform: none;
         border: none;
-        text-transform: uppercase;
+    }
+    input:focus{
+        color: #6C63FF;
     }
     *:focus{
         outline: none;
@@ -233,7 +235,7 @@ main{
     background-color: #534CC2;
     box-sizing: border-box;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     color:white;
     display: none;
     align-items: center;
@@ -259,6 +261,7 @@ main{
 }
 .undoText{
     display: flex;
+    gap: 2px;
     >div{
         font-family: Arial, Helvetica, sans-serif;
     };
