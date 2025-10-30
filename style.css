@@ -82,7 +82,7 @@ header{
         text-transform: none;
         border: none;
     }
-    input:focus{
+    input.light-theme:focus{
         color: #6C63FF;
     }
     *:focus{
@@ -120,7 +120,12 @@ header{
         height: 38px;
         font-size: 18px;
         color: white;
-        >*{text-transform: capitalize;}
+        >*{
+            background-color: white;
+            color: #6b63ff;
+            text-transform: capitalize;
+            font-size: 18px;
+        }
     }
 
     #theme{
@@ -194,6 +199,11 @@ main{
         height: 20px;
         font-size: 20px;
         border: none;
+        background: none;
+        color: #6b63ff;
+    }
+    .textInput:focus{
+        outline: none;
     }
     .listName{
         /* width: 390px; */
@@ -241,7 +251,7 @@ main{
     align-items: center;
     justify-content: center;
     gap: 15px;
-    
+    transform: scaleX(0);
 }
 .undoPanel:hover{
     background-color: #6C63FF;

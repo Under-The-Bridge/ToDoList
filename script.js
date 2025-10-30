@@ -7,6 +7,7 @@ let emptyListImg = document.querySelector("#emptyList");
 let inputNote = document.querySelector("#inputNote");
 let applyBtn = document.querySelector("#apply");
 let mainElem = document.querySelector("#main");
+let isLightTheme = true;
 let addingPanelOpened = false;
 let countLists = 0;
 
@@ -20,9 +21,11 @@ addListBtn.addEventListener("click", ()=>{
         if(esc.key == "Escape" && addingPanelOpened){
             CloseAddPanel();
         }
-        if(esc.key == "Enter" && addingPanelOpened){
-            addNote();
-        }
+        // Тут баг так что не раскоменчивать пока не придумаешь как его исправить
+
+        // if(esc.key == "Enter" && addingPanelOpened){
+        //     addNote();
+        // }
     });
 })
 canselBtn.addEventListener("click", CloseAddPanel);
@@ -51,15 +54,22 @@ let switchTheme = document.querySelector("#theme");
 switchTheme.addEventListener("click", ()=>{
     lightThemeElements.forEach(elem =>{
         if(elem.className == "light-theme"){
+            isLightTheme = false;
             elem.className = "dark-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/sun.svg)"
             if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detectiveDarkTheme.svg)"
         }else{
+            isLightTheme = true;
             elem.className = "light-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/moon.svg)"
             if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detective.svg)"
         }
     });
+
+    //ААААААААААААААААААА КОСТЫЛЬ КАКОЙ ЖЕ ОН ТУПОЙ. ДА????? ТАК ВЕДЬ?????????
+    document.querySelectorAll(".list").forEach(element =>{
+        checkNote(element);
+    })
 });
 
 //adding Notes
@@ -101,7 +111,6 @@ function addNote(){
     inputNote.value = "";
     main.appendChild(list);
     addEventListenerNote(list);
-    arrayLists.push(list);
 }
 
 function addEmptyImg(){
@@ -131,14 +140,7 @@ function addEmptyImg(){
 
 function addEventListenerNote(note){
     note.querySelector(".checkbox").addEventListener("input",()=>{
-        let listNameStyle = note.querySelector(".listName").style;
-        if (listNameStyle.textDecoration == "line-through") {
-            listNameStyle.textDecoration = "none";
-            listNameStyle.color = "black";
-        }else{
-            listNameStyle.textDecoration = "line-through";
-            listNameStyle.color = "#25252580";
-        }
+        checkNote(note);
     })
     note.querySelector(".trashCan").addEventListener("click",()=>{
         trachNote(note)
@@ -149,18 +151,40 @@ function addEventListenerNote(note){
     });
 }
 
+function checkNote(note){
+    if(!note.querySelector(".checkbox").checked) return 0;
+    let listNameStyle = note.querySelector(".listName").style;
+    if (listNameStyle.textDecoration == "line-through") {
+        listNameStyle.textDecoration = "none";
+        listNameStyle.color = "";
+    }else{
+        listNameStyle.textDecoration = "line-through";
+        if(isLightTheme){
+            listNameStyle.color = "#25252580";
+        }else{
+            listNameStyle.color = "#FFFFFF80";
+        }
+    }
+}
+
 function trachNote(note){
     let counter = note.querySelector(".counter");
     let undo = note.querySelector(".undoPanel");
-    note.querySelector(".listBtns").style.display = "none";
     note.querySelector(".undoPanel").style.display = "flex";
+    note.querySelector(".listBtns").style.display = "none";
+    setTimeout(()=>{
+        note.querySelector(".undoPanel").style.transform = "scaleX(1)";
+    },10)
     let chanceToUndo = setInterval(()=>{
         counter.innerText--;
-        if(counter.innerText == 0) note.remove();
+        if(counter.innerText <= 0) note.remove();
     },1000);
     undo.addEventListener("click",()=>{
-        note.querySelector(".listBtns").style.display = "flex";
-        note.querySelector(".undoPanel").style.display = "none";
+        note.querySelector(".undoPanel").style.transform = "scaleX(0)";
+        setTimeout(()=>{
+            note.querySelector(".undoPanel").style.display = "none";
+            note.querySelector(".listBtns").style.display = "flex";
+        },250)
         clearInterval(chanceToUndo);
         counter.innerText = "3";
     })
@@ -170,6 +194,7 @@ function penNote(note){
     let changeInputText = note.querySelector(".changeInputText");
     let listName = note.querySelector(".listName");
     let isEntered = false;
+    changeInputText.children[0].value = listName.innerText;
     if(listName.style.display == "flex" || listName.style.display == ""){
         listName.style.display = "none";
         changeInputText.style.display = "flex";
@@ -179,7 +204,6 @@ function penNote(note){
                 isEntered = true;
                 listName.style.display = "flex";
                 listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
-                changeInputText.children[0].value = "";
                 changeInputText.style.display = "none";
             }
             if(enter.key == "Escape"){
@@ -208,6 +232,9 @@ searchInput.addEventListener('input',()=>{
 let selectionOptions = document.querySelector("#vipad")
 
 selectionOptions.addEventListener("input", ()=>{
+    if(selectionOptions.value == "all") selectionOptions.style.fontSize = "18px";
+    if(selectionOptions.value == "complete") selectionOptions.style.fontSize = "13px";
+    if(selectionOptions.value == "incomplete") selectionOptions.style.fontSize = "11px";
     globalFilter()
     EmptyImgForSearch();
 })
@@ -266,7 +293,7 @@ function globalFilter(){
 addEventListener('keyup',(i)=>{
     if(i.key == "i"){
         // console.log(arrayLists);
-        // alert(document.querySelector(".checkbox").checked)
+        alert(document.querySelector(".checkbox").checked)
         // alert(selectionOptions.value);
         // searchInput.focus();
     }
