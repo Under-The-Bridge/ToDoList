@@ -184,6 +184,10 @@ main{
         height: 26px;
         border: 1px #6C63FF solid;
         box-sizing: border-box;
+        accent-color: #6C63FF;
+    }
+    .checkbox:hover{
+        accent-color: #6C63FF;
     }
     .changeInputText{
         width: 420px;

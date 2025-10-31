@@ -30,6 +30,11 @@ addListBtn.addEventListener("click", ()=>{
 })
 canselBtn.addEventListener("click", CloseAddPanel);
 panelBG.addEventListener("click", CloseAddPanel);
+addEventListener("keydown", (tab)=>{
+    if(tab.key == "Tab"){
+        OpenAddPanel();
+    }
+})
 
 function OpenAddPanel(){
     wholeAddPanel.style.zIndex = "1";
@@ -111,6 +116,7 @@ function addNote(){
     inputNote.value = "";
     main.appendChild(list);
     addEventListenerNote(list);
+    globalFilter();
 }
 
 function addEmptyImg(){
@@ -152,9 +158,8 @@ function addEventListenerNote(note){
 }
 
 function checkNote(note){
-    if(!note.querySelector(".checkbox").checked) return 0;
     let listNameStyle = note.querySelector(".listName").style;
-    if (listNameStyle.textDecoration == "line-through") {
+    if (!note.querySelector(".checkbox").checked) {
         listNameStyle.textDecoration = "none";
         listNameStyle.color = "";
     }else{
@@ -177,7 +182,11 @@ function trachNote(note){
     },10)
     let chanceToUndo = setInterval(()=>{
         counter.innerText--;
-        if(counter.innerText <= 0) note.remove();
+        if(counter.innerText <= 0){
+            note.remove();
+            clearInterval(chanceToUndo);
+            EmptyImgForSearch();
+        } 
     },1000);
     undo.addEventListener("click",()=>{
         note.querySelector(".undoPanel").style.transform = "scaleX(0)";
@@ -290,11 +299,11 @@ function globalFilter(){
 
 // debug zone
 
-addEventListener('keyup',(i)=>{
-    if(i.key == "i"){
-        // console.log(arrayLists);
-        alert(document.querySelector(".checkbox").checked)
-        // alert(selectionOptions.value);
-        // searchInput.focus();
-    }
-})
+// addEventListener('keyup',(i)=>{
+//     if(i.key == "i"){
+//         // console.log(arrayLists);
+//         alert(document.querySelector(".checkbox").checked)
+//         // alert(selectionOptions.value);
+//         // searchInput.focus();
+//     }
+// })
