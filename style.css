@@ -67,7 +67,6 @@ header{
     display: flex;
     justify-content: space-between;
     #input{
-        border: 1px #6C63FF solid;
         box-sizing: border-box;
         border-radius:5px;
         width: 595px;
@@ -75,6 +74,13 @@ header{
         display: flex;
         justify-content: space-between;
         padding: 8px 8px 8px 16px;
+        border: 1px #6C63FF solid;
+        background: none;
+    }
+    #input.dark-theme{
+        background: none;
+        box-shadow: none;
+        border: 1px solid white;
     }
     input{
         width: 100%;
@@ -84,6 +90,7 @@ header{
     }
     input.light-theme:focus{
         color: #6C63FF;
+        
     }
     *:focus{
         outline: none;
@@ -341,6 +348,11 @@ main{
     display: flex;
     justify-content: center;
     align-content: center;
+    border: 0px black;
+    box-sizing: border-box;
+}
+#panel.dark-theme{
+    border: 1px solid white;
 }
 #inner-panel{
     width: 440px;
@@ -384,6 +396,9 @@ main{
         display: flex;
         justify-content: space-between;
         padding: 8px 8px 8px 16px;
+    }
+    input.dark-theme{
+        border: 1px solid white;
     }
     input::placeholder{
         color:#C3C1E5;

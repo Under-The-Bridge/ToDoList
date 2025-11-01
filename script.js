@@ -62,11 +62,13 @@ switchTheme.addEventListener("click", ()=>{
             isLightTheme = false;
             elem.className = "dark-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/sun.svg)"
+            document.querySelector("#input>button>div").style.backgroundImage = "url(img/dark-lupa.svg)"
             if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detectiveDarkTheme.svg)"
         }else{
             isLightTheme = true;
             elem.className = "light-theme";
             switchTheme.querySelector("div").style.backgroundImage = "url(img/moon.svg)"
+            document.querySelector("#input>button>div").style.backgroundImage = "url(img/lupa.svg)"
             if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detective.svg)"
         }
     });
@@ -199,7 +201,9 @@ function trachNote(note){
     })
 }
 
+
 function penNote(note){
+    let focused = false;
     let changeInputText = note.querySelector(".changeInputText");
     let listName = note.querySelector(".listName");
     let isEntered = false;
@@ -207,7 +211,11 @@ function penNote(note){
     if(listName.style.display == "flex" || listName.style.display == ""){
         listName.style.display = "none";
         changeInputText.style.display = "flex";
+        
         changeInputText.children[0].focus();
+        if(changeInputText.children[0] == document.activeElement){
+            focused = true
+        }
         changeInputText.children[0].addEventListener("keyup", (enter)=>{
             if(enter.key == "Enter" && !isEntered){
                 isEntered = true;
@@ -215,7 +223,7 @@ function penNote(note){
                 listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
                 changeInputText.style.display = "none";
             }
-            if(enter.key == "Escape"){
+            if(enter.key == "Escape" || !focused){
                 listName.style.display = "flex";
                 changeInputText.style.display = "none";
             }
@@ -224,6 +232,12 @@ function penNote(note){
         listName.style.display = "flex";
         changeInputText.style.display = "none";
     }
+    addEventListener("click",()=>{
+        if(changeInputText.children[0] != document.activeElement){
+            listName.style.display = "flex";
+            changeInputText.style.display = "none";
+        }
+    })
     EmptyImgForSearch();
 }
 
