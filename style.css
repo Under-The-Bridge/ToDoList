@@ -350,6 +350,7 @@ main{
     align-content: center;
     border: 0px black;
     box-sizing: border-box;
+    z-index: 2;
 }
 #panel.dark-theme{
     border: 1px solid white;

@@ -29,7 +29,9 @@ addListBtn.addEventListener("click", ()=>{
     });
 })
 canselBtn.addEventListener("click", CloseAddPanel);
-panelBG.addEventListener("click", CloseAddPanel);
+addEventListener("mousedown", (mouse)=>{
+    if(mouse.button == 3) CloseAddPanel();
+});
 addEventListener("keydown", (tab)=>{
     if(tab.key == "Tab"){
         OpenAddPanel();
@@ -37,20 +39,20 @@ addEventListener("keydown", (tab)=>{
 })
 
 function OpenAddPanel(){
+    addingPanelOpened = true;
     wholeAddPanel.style.zIndex = "1";
     panelBG.style.display = "flex";
     setTimeout(()=>{
         panelBG.style.opacity = "1";
     }, 250)
-    addingPanelOpened = true;
 }
 function CloseAddPanel(){
+    addingPanelOpened = false;
     wholeAddPanel.style.zIndex = "-1";
     panelBG.style.opacity = "0";
     setTimeout(()=>{
         panelBG.style.display = "none";
     }, 250)
-    addingPanelOpened = false;
 }
 
 //dark theme
@@ -236,6 +238,7 @@ function penNote(note){
         if(changeInputText.children[0] != document.activeElement){
             listName.style.display = "flex";
             changeInputText.style.display = "none";
+            listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
         }
     })
     EmptyImgForSearch();
