@@ -25,6 +25,7 @@ content{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
     >div{
         display: flex;
@@ -35,13 +36,18 @@ content{
 }
 
 header{
-    width: 750px;
+    /* width: 100vw; */
     height: 135px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: end;
     gap: 25px;
+    
+    
+    
+    
+    
     >div{
         font-size: 26px;
     }
@@ -62,14 +68,14 @@ header{
 }
 
 #underHeadPanel{
-    width: 750px;
+    width: 40vw;
     height: 38px;
     display: flex;
     justify-content: space-between;
     #input{
         box-sizing: border-box;
         border-radius:5px;
-        width: 595px;
+        width: 32.5vw;
         height: 38px;
         display: flex;
         justify-content: space-between;
@@ -123,7 +129,7 @@ header{
     }
 
     #vipad{
-        width: 85px;
+        width: 4vw;
         height: 38px;
         font-size: 18px;
         color: white;
@@ -155,27 +161,27 @@ header{
 }
 
 main{
-    width: 750px;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 #emptyList{
-    width: 221px;
-    height: 200px;
+    width: 100%;
+    height:100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
 #detective{
-    width: 221px;
-    height: 174px;
+    width: 15vw;
+    height:25vh;
+    background-size:cover;
     background-image: url(img/detective.svg);
 }
 .list{
-    width: 525px;
     height: 60px;
     display: flex;
     justify-content: space-between;
@@ -197,7 +203,7 @@ main{
         accent-color: #6C63FF;
     }
     .changeInputText{
-        width: 420px;
+        width: 25vw;
         height: 26px;
         border: 1px #6C63FF solid;
         border-radius: 5px;
@@ -206,7 +212,7 @@ main{
         align-items: center;
     }
     .textInput{
-        width: 400px;
+        width: 22.5vw;
         height: 20px;
         font-size: 20px;
         border: none;
@@ -217,9 +223,10 @@ main{
         outline: none;
     }
     .listName{
-        /* width: 390px; */
+        width: 25vw;
         height: 20px;
         font-size: 20px;
+        overflow-y:hidden
     }
     .listBtns{
         width: 62px;
@@ -308,7 +315,7 @@ main{
 #buttonPos{
     display: flex;
     justify-content: end;
-    width: 750px;
+    width: 50vw;
 }
 #addListButton{
     width: 50px;
@@ -342,7 +349,7 @@ main{
 }
 #panel{
     flex-wrap: wrap;
-    width: 500px;
+    width: 30vw;
     height: 289px;
     border-radius: 16px;
     display: flex;
@@ -356,7 +363,7 @@ main{
     border: 1px solid white;
 }
 #inner-panel{
-    width: 440px;
+    width: 30vw;
     height: 255px;
     display: flex;
     flex-direction: column;
@@ -376,7 +383,7 @@ main{
         }
     }
     #second{
-        width: 100%;
+        width: 27.5vw;
         display: flex;
         justify-content: space-between;
     }
@@ -392,7 +399,7 @@ main{
         border: 1px #6C63FF solid;
         box-sizing: border-box;
         border-radius:5px;
-        width: 440px;
+        width: 27.5vw;
         height: 38px;
         display: flex;
         justify-content: space-between;
