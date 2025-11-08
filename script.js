@@ -29,7 +29,7 @@ addListBtn.addEventListener("click", ()=>{
     });
 })
 canselBtn.addEventListener("click", CloseAddPanel);
-panelBG.addEventListener("click", CloseAddPanel);
+// panelBG.addEventListener("click", CloseAddPanel);
 addEventListener("keydown", (tab)=>{
     if(tab.key == "Tab"){
         OpenAddPanel();
@@ -104,6 +104,10 @@ let listParts = `
 applyBtn.addEventListener("click",addNote);
 
 function addNote(){
+    if(inputNote.value.length >= 30){
+        alert("Слишком длинное имя");
+        return 0;
+    } 
     countLists++;
     addEmptyImg();
     let list = document.createElement("div");
@@ -218,10 +222,14 @@ function penNote(note){
         }
         changeInputText.children[0].addEventListener("keyup", (enter)=>{
             if(enter.key == "Enter" && !isEntered){
-                isEntered = true;
-                listName.style.display = "flex";
-                listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
-                changeInputText.style.display = "none";
+                if(changeInputText.children[0].value.length >= 30){
+                    alert("Слишком длинное имя");
+                }else{
+                    isEntered = true;
+                    listName.style.display = "flex";
+                    listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
+                    changeInputText.style.display = "none";
+                }
             }
             if(enter.key == "Escape" || !focused){
                 listName.style.display = "flex";
@@ -255,9 +263,9 @@ searchInput.addEventListener('input',()=>{
 let selectionOptions = document.querySelector("#vipad")
 
 selectionOptions.addEventListener("input", ()=>{
-    if(selectionOptions.value == "all") selectionOptions.style.fontSize = "18px";
-    if(selectionOptions.value == "complete") selectionOptions.style.fontSize = "13px";
-    if(selectionOptions.value == "incomplete") selectionOptions.style.fontSize = "11px";
+    if(selectionOptions.value == "all") selectionOptions.style.width = "85px";
+    if(selectionOptions.value == "complete") selectionOptions.style.width = "110px";
+    if(selectionOptions.value == "incomplete") selectionOptions.style.width = "120px";
     globalFilter()
     EmptyImgForSearch();
 })
@@ -288,7 +296,6 @@ function EmptyImgForSearch(){
     }
 }
 
-//YA MOJET TYPOI NO ON KAKIMTO CHUDOM ZARABOTAL ETOT FILTER            F@CK
 function globalFilter(){
     let lists = document.querySelectorAll(".list");
     lists.forEach(element =>{
