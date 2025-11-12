@@ -13,7 +13,6 @@ let countLists = 0;
 
 
 
-
 addListBtn.addEventListener("click", ()=>{
     OpenAddPanel();
     inputNote.focus();
@@ -22,19 +21,24 @@ addListBtn.addEventListener("click", ()=>{
             CloseAddPanel();
         }
         // Тут баг так что не раскоменчивать пока не придумаешь как его исправить
-
-        // if(esc.key == "Enter" && addingPanelOpened){
-        //     addNote();
-        // }
+        if(esc.key == "Enter" && addingPanelOpened){
+            addNote();
+        }
     });
 })
+
+
 canselBtn.addEventListener("click", CloseAddPanel);
 // panelBG.addEventListener("click", CloseAddPanel);
-addEventListener("keydown", (tab)=>{
-    if(tab.key == "Tab"){
+addEventListener("keydown", (s)=>{
+    if(s.key == "Shift" && !addingPanelOpened){
         OpenAddPanel();
+    }else if(s.key == "Shift" && addingPanelOpened){
+        CloseAddPanel();
     }
 })
+
+let temp = document.querySelector("#panelAddList");
 
 function OpenAddPanel(){
     wholeAddPanel.style.zIndex = "1";
@@ -48,7 +52,7 @@ function CloseAddPanel(){
     wholeAddPanel.style.zIndex = "-1";
     panelBG.style.opacity = "0";
     setTimeout(()=>{
-        panelBG.style.display = "none";
+        temp.style.display = "none";
     }, 250)
     addingPanelOpened = false;
 }
@@ -123,6 +127,7 @@ function addNote(){
     main.appendChild(list);
     addEventListenerNote(list);
     globalFilter();
+    CloseAddPanel();
 }
 
 function addEmptyImg(){
@@ -244,6 +249,7 @@ function penNote(note){
         if(changeInputText.children[0] != document.activeElement){
             listName.style.display = "flex";
             changeInputText.style.display = "none";
+            listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
         }
     })
     EmptyImgForSearch();
@@ -316,6 +322,13 @@ function globalFilter(){
 
 
 
+//langs
+
+const lang_btn = document.querySelector("#lang-btn");
+
+// let tem = JSON.parse(json_langs);
+
+// alert(tem.temp)
 
 
 // debug zone

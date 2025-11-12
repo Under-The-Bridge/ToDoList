@@ -34,6 +34,24 @@ content{
     }
 }
 
+#language{
+    width: 99%;
+    position: absolute;
+    top: 1%;
+    display: flex;
+    justify-content: end;
+    >div{
+        width: 35px;
+        height: 35px;
+        background-color: #6b63ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+        color: white;
+    }
+}
+
 header{
     width: 750px;
     height: 135px;
@@ -306,6 +324,8 @@ main{
     justify-content: center;
     align-items: end;
     z-index: -1;
+    /* я прост тупой и не мог ниче придумать */
+    /* transform: translateX(375px); */
 }
 #buttonPos{
     display: flex;
