@@ -30,13 +30,13 @@ addListBtn.addEventListener("click", ()=>{
 
 canselBtn.addEventListener("click", CloseAddPanel);
 // panelBG.addEventListener("click", CloseAddPanel);
-addEventListener("keydown", (s)=>{
-    if(s.key == "Shift" && !addingPanelOpened){
-        OpenAddPanel();
-    }else if(s.key == "Shift" && addingPanelOpened){
-        CloseAddPanel();
-    }
-})
+// addEventListener("keydown", (s)=>{
+//     if(s.key == "Shift" && !addingPanelOpened){
+//         OpenAddPanel();
+//     }else if(s.key == "Shift" && addingPanelOpened){
+//         CloseAddPanel();
+//     }
+// })
 
 let temp = document.querySelector("#panelAddList");
 
@@ -322,9 +322,15 @@ function globalFilter(){
 
 
 
+
+
+
+
+
+
 //langs
 
-const lang_btn = document.querySelector("#lang-btn");
+// const lang_btn = document.querySelector("#lang-btn");
 
 // let tem = JSON.parse(json_langs);
 
