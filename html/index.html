@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Document</title>
 </head>
 <body class="light-theme">
@@ -59,16 +59,16 @@
     <div id="addListPanel">
         <div id="panelAddList">
             <div id="panel" class="light-theme">
-                <div id="inner-panel" class="light-theme">
+                <form name="form" action="../php/GetNote.php" method="get" id="inner-panel" class="light-theme">
                     <div id="first">
                         <div id="NewNote"><div>NEW NOTE</div></div>
-                        <input type="text" placeholder="Input your note..." id="inputNote" class="light-theme">
+                        <input type="text" placeholder="Input your note..." id="inputNote" class="light-theme" name="NoteName">
                     </div>
                     <div id="second">
-                        <div id="cansel" class="light-theme"><div>CANSEL</div></div>
-                        <div id="apply"><div>APPLY</div></div>
+                        <div id="cancel" class="light-theme"><div>CANCEL</div></div>
+                        <div id="apply"><button type="submit">APPLY</button></div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div id="buttonPos">
@@ -77,8 +77,8 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script src="lang-script.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/lang-script.js"></script>
 </body>
 
 </html>

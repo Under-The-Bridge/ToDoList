@@ -73,7 +73,7 @@ header{
     align-items: center;
 }
 
-#input, #vipad, #theme,#addListButton,#inputNote, #cansel, #apply, .changeInputText{
+#input, #vipad, #theme,#addListButton,#inputNote, #cancel, #apply, .changeInputText{
     box-shadow: 0px 0px 4px #6C63FF;
     border: 0px #6b63ff00;
     box-sizing: border-box;
@@ -132,7 +132,7 @@ header{
         >div{
             width: 21px;
             height: 21px;
-            background-image: url(img/lupa.svg);
+            background-image: url(../img/lupa.svg);
             background-repeat: no-repeat;
         }
     }
@@ -164,7 +164,7 @@ header{
         >div{
             width: 22px;
             height: 22px;
-            background-image: url(img/moon.svg);
+            background-image: url(../img/moon.svg);
             background-repeat: no-repeat;
         }
     }
@@ -192,7 +192,7 @@ main{
 #detective{
     width: 221px;
     height: 174px;
-    background-image: url(img/detective.svg);
+    background-image: url(../img/detective.svg);
 }
 .list{
     width: 525px;
@@ -254,18 +254,18 @@ main{
         .pen{
             width: 18px;
             height: 18px;
-            background-image: url(img/pen.svg);
+            background-image: url(../img/pen.svg);
         }
         .pen:hover{
-            background-image: url(img/penHovered.svg);
+            background-image: url(../img/penHovered.svg);
         }
         .trashCan{
             width: 18px;
             height: 18px;
-            background-image: url(img/trash.svg);
+            background-image: url(../img/trash.svg);
         }
         .trashCan:hover{
-            background-image: url(img/trashCanHovered.svg);
+            background-image: url(../img/trashCanHovered.svg);
         }
     }
 }
@@ -310,7 +310,7 @@ main{
 .undoImg{
     width: 15px;
     height: 14px;
-    background-image: url(img/undoArrow.svg);
+    background-image: url(../img/undoArrow.svg);
 }
 .list:last-child{
     border: none;
@@ -344,7 +344,7 @@ main{
     >div{
         width: 24px;
         height: 24px;
-        background-image: url(img/plus.svg);
+        background-image: url(../img/plus.svg);
     }
 }
 #addListButton:hover{
@@ -428,7 +428,7 @@ main{
         font-size: 16px;
     }
 }
-#cansel{
+#cancel{
     width: 110px;
     border: 1px #6C63FF solid;
     box-sizing: border-box;
@@ -437,5 +437,10 @@ main{
 #apply{
     width: 97px;
     background-color: #6C63FF;
-    color: white;
+    button{
+        font-size: 18px;
+        color: white;
+        background: none;
+        border: none;
+    }
 }

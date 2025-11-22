@@ -2,7 +2,7 @@ let allElems = document.querySelectorAll(".checkbox");
 let addListBtn = document.querySelector("#addListButton");
 let panelBG = document.querySelector("#panelAddList");
 let wholeAddPanel = document.querySelector("#addListPanel");
-let canselBtn = document.querySelector("#second>#cansel");
+let cancelBtn = document.querySelector("#second>#cancel");
 let emptyListImg = document.querySelector("#emptyList");
 let inputNote = document.querySelector("#inputNote");
 let applyBtn = document.querySelector("#apply");
@@ -28,7 +28,7 @@ addListBtn.addEventListener("click", ()=>{
 })
 
 
-canselBtn.addEventListener("click", CloseAddPanel);
+cancelBtn.addEventListener("click", CloseAddPanel);
 // panelBG.addEventListener("click", CloseAddPanel);
 // addEventListener("keydown", (s)=>{
 //     if(s.key == "Shift" && !addingPanelOpened){
@@ -65,15 +65,15 @@ switchTheme.addEventListener("click", ()=>{
         if(elem.className == "light-theme"){
             isLightTheme = false;
             elem.className = "dark-theme";
-            switchTheme.querySelector("div").style.backgroundImage = "url(img/sun.svg)"
-            document.querySelector("#input>button>div").style.backgroundImage = "url(img/dark-lupa.svg)"
-            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detectiveDarkTheme.svg)"
+            switchTheme.querySelector("div").style.backgroundImage = "url(../img/sun.svg)"
+            document.querySelector("#input>button>div").style.backgroundImage = "url(../img/dark-lupa.svg)"
+            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(../img/detectiveDarkTheme.svg)"
         }else{
             isLightTheme = true;
             elem.className = "light-theme";
-            switchTheme.querySelector("div").style.backgroundImage = "url(img/moon.svg)"
-            document.querySelector("#input>button>div").style.backgroundImage = "url(img/lupa.svg)"
-            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(img/detective.svg)"
+            switchTheme.querySelector("div").style.backgroundImage = "url(../img/moon.svg)"
+            document.querySelector("#input>button>div").style.backgroundImage = "url(../img/lupa.svg)"
+            if(document.querySelector("#detective") != null) document.querySelector("#detective").style.backgroundImage = "url(../img/detective.svg)"
         }
     });
 
@@ -319,6 +319,24 @@ function globalFilter(){
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const sendForm = document.querySelector("#apply>button");
+
+// sendForm.addEventListener("click",(e)=>{
+//     // e.preventDefault();
+// })
 
 
 
