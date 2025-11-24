@@ -123,7 +123,7 @@ function addNote(){
     }else{
         list.querySelector(".listName").innerText = inputNote.value;
     }
-    inputNote.value = "";
+    // inputNote.value = "";
     main.appendChild(list);
     addEventListenerNote(list);
     globalFilter();
@@ -134,7 +134,7 @@ function addEmptyImg(){
     if(countLists == 0){
         let elemEmpty = document.createElement("div");
         elemEmpty.id = "emptyList";
-        elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>'
+        elemEmpty.innerHTML = '<div id="detective"></div><div>Empty</div>';
         mainElem.appendChild(elemEmpty);
     }else if(document.querySelector("#emptyList")){
         document.querySelector("#emptyList").remove();
@@ -332,10 +332,10 @@ function globalFilter(){
 
 
 
-// const sendForm = document.querySelector("#apply>button");
+// const sendForm = document.querySelector("#apply");
 
 // sendForm.addEventListener("click",(e)=>{
-//     // e.preventDefault();
+//     e.preventDefault();
 // })
 
 

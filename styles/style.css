@@ -437,10 +437,9 @@ main{
 #apply{
     width: 97px;
     background-color: #6C63FF;
-    button{
+    div{
         font-size: 18px;
         color: white;
-        background: none;
         border: none;
     }
 }
