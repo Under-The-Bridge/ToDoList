@@ -354,6 +354,15 @@ function globalFilter(){
 
 // alert(tem.temp)
 
+document.getElementById("apply").addEventListener("click",()=>{
+    let task = document.getElementById("inputNote").value;
+    let fb = new FormData();
+    fb.append("task",task);
+    fetch("../php/GetNote.php",{
+        method:"post",
+        body:fd
+    })
+})
 
 // debug zone
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <button id="btn">Send DDoS attack!</button>
+    <div class="container"></div>
+    <div class="container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            
+        })
+
+        document.getElementById("btn").addEventListener("click",()=>{
+            let test_text = document.getElementById("input").value;
+            let fd = new FormData();
+
+            fd.append("test_text",test_text)
+            
+            fetch("../php/test.html")
+            .then(data=>data.text())
+            .then((data)=>{
+                document.getElementsByClassName("container")[0].innerHTML = data;
+            })
+
+            fetch("../php/test.php",{
+                method:"post",
+                body:fd
+            })
+        })
+    </script>
+</body>
+</html>
