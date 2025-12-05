@@ -197,6 +197,13 @@ function trachNote(note){
             note.remove();
             clearInterval(chanceToUndo);
             EmptyImgForSearch();
+            let task = note.querySelector(".listName").innerText;
+            let fd = new FormData();
+            fd.append("task",task);
+            fetch("../php/RemoveNote.php",{
+                method:"post",
+                body:fd
+            })
         } 
     },1000);
     undo.addEventListener("click",()=>{
@@ -252,6 +259,14 @@ function penNote(note){
             listName.innerText = (changeInputText.children[0].value == "")? "NOTE":changeInputText.children[0].value;
         }
     })
+    alert("если вы хотите поменять название то лучше меняйте txt файл");
+    window.open("../php/files/Storage.txt");
+    // let fd = new FormData();
+    // fd.append("task",task);
+    // fetch("../php/RemoveNote.php",{
+    //     method:"post",
+    //     body:fd
+    // })
     EmptyImgForSearch();
 }
 
@@ -354,15 +369,45 @@ function globalFilter(){
 
 // alert(tem.temp)
 
+
+document.addEventListener("DOMContentLoaded",()=>{
+    fetch("../php/GetNote.php")
+    .then(data=>data.json())
+    .then((data)=>{
+        addLoadedTask(data)
+    })
+})
+
 document.getElementById("apply").addEventListener("click",()=>{
     let task = document.getElementById("inputNote").value;
-    let fb = new FormData();
-    fb.append("task",task);
-    fetch("../php/GetNote.php",{
+    let fd = new FormData();
+    fd.append("task",task);
+    fetch("../php/AddNote.php",{
         method:"post",
         body:fd
     })
 })
+
+function addLoadedTask(arr){
+    for (let i = 0; i < arr.length; i++) {
+        loadNote(arr[i])
+    }
+}
+
+
+function loadNote(name){
+    countLists++;
+    addEmptyImg();
+    let list = document.createElement("div");
+    list.innerHTML = listParts;
+    list.className = "list";
+    list.id = `note${countLists}`;
+    list.querySelector(".listName").innerText = name;
+    main.appendChild(list);
+    addEventListenerNote(list);
+    globalFilter();
+    CloseAddPanel();
+}
 
 // debug zone
 

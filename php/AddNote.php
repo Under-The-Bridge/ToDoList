@@ -2,10 +2,11 @@
 $FileName = "files/Storage.txt";
 if(!file_exists($FileName)){
     $NoteStorage = fopen($FileName,"w");
+    fputs($NoteStorage,$_POST["task"]);
 }else{
     $NoteStorage = fopen($FileName,"a");
+    fputs($NoteStorage,";".$_POST["task"]);
 }
-fputs($NoteStorage,$_POST["test_text"].";");
 fclose($NoteStorage);
 // header("Location: ../html/")
 
