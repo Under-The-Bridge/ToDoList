@@ -11,8 +11,13 @@
     <div class="container"></div>
     <div class="container"></div>
     <script>
+
         document.addEventListener("DOMContentLoaded",()=>{
-            
+            fetch("../php/GetNote.php")
+            .then(data=>data.json())
+            .then((data)=>{
+                console.log(data);
+            })
         })
 
         document.getElementById("btn").addEventListener("click",()=>{
@@ -27,7 +32,7 @@
                 document.getElementsByClassName("container")[0].innerHTML = data;
             })
 
-            fetch("../php/test.php",{
+            fetch("../php/AddNote.php",{
                 method:"post",
                 body:fd
             })
